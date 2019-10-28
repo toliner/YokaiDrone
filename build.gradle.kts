@@ -16,6 +16,8 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("ch.qos.logback:logback-classic:1.2.3")
+    implementation("com.github.ajalt:clikt:2.2.0")
+
     api("net.dv8tion:JDA:4.0.0_54")
 }
 
