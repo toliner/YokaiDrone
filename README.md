@@ -1,2 +1,2 @@
-# YoukaiDrone
-YoukaiDrone is a discord bot framework, which can work standalone.
+# YokaiDrone
+YokaiDrone is a discord bot framework, which can work standalone.

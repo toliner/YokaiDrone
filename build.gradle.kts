@@ -24,5 +24,5 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClassName = "dev.toliner.youkaidrone.BootstrapKt"
+    mainClassName = "dev.toliner.yokaidrone.BootstrapKt"
 }
