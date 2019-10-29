@@ -14,6 +14,7 @@ import dev.toliner.yokaidrone.api.Yokai
 import net.dv8tion.jda.api.JDABuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
     Bootstrap().main(args)
@@ -29,17 +30,28 @@ private class Bootstrap : CliktCommand() {
     private val yokai by option(help = "List of yokai class canonical names, separated by ':'")
 
     override fun run() {
+        logger.info("YokaiDrone start setting up")
         val builder = JDABuilder(token)
         yokai?.split(':')?.forEach {
             runCatching {
                 ClassLoader.getSystemClassLoader().loadClass(it).newInstance() as Yokai
             }.onFailure { e ->
                 logger.error("$it is not valid canonical name for the yokai class")
-                logger.debug(e.localizedMessage)
-                logger.debug(e.stackTrace.joinToString("\n"))
+                printStacktraceToDebug(e)
+                exitProcess(1)
             }.onSuccess {
                 it.init(builder)
             }
+        }
+        logger.info("YokaiDrone is ready now, start booting.")
+        builder.build().awaitReady()
+    }
+
+    private fun printStacktraceToDebug(e: Throwable) {
+        logger.debug(e.toString())
+        logger.debug(e.stackTrace.joinToString("\n"))
+        if (e.cause != null) {
+            printStacktraceToDebug(e.cause!!)
         }
     }
 }
