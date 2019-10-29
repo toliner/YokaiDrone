@@ -1,0 +1,28 @@
+name: Run Gradle on PRs
+on: [pull_request, push]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: "Setup Java"
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: run test
+      uses: eskatos/gradle-command-action@v1
+      with:
+        arguments: test
+      env:
+        DISCORD_ACCESS_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: test-result
+        path: build/reports/tests
