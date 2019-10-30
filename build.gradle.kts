@@ -5,11 +5,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.URL
 
 plugins {
     kotlin("jvm") version "1.3.50"
     application
+    id("org.jetbrains.dokka") version "0.10.0"
 }
 
 group = "dev.toliner"
@@ -41,4 +44,44 @@ application {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks {
+
+    fun DokkaTask.configure() {
+        configuration {
+            sourceLink {
+                path = "src/main/kotlin"
+                url = "https://github.com/toliner/YokaiDrone/tree/master/src/main/kotlin"
+                lineSuffix = "#L"
+            }
+            jdkVersion = 8
+
+            noStdlibLink = false
+            noJdkLink = false
+
+            externalDocumentationLink {
+                url = URL("https://ci.dv8tion.net/job/JDA/javadoc/")
+                packageListUrl = URL("https://ci.dv8tion.net/job/JDA/javadoc/element-list")
+            }
+        }
+    }
+
+    val dokka by getting(DokkaTask::class) {
+        outputFormat = "html"
+        outputDirectory = "$buildDir/dokka/html"
+        configure()
+    }
+
+    register("dokka-javadoc", DokkaTask::class) {
+        outputFormat = "javadoc"
+        outputDirectory = "$buildDir/dokka/javadoc"
+        configure()
+    }
+
+    register("dokka-gfm", DokkaTask::class) {
+        outputFormat = "gfm"
+        outputDirectory = "$buildDir/dokka/gfm"
+        configure()
+    }
 }
