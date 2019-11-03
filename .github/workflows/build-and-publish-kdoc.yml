@@ -11,22 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      # Wait for bug fix: https://github.com/actions/cache/issues/39
       - name: "Cache ~/.gradle"
         uses: actions/cache@preview
-        if: runner.os != 'Windows'
         with:
           path: "~/.gradle"
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle.kts') }}
           restore-keys: ${{ runner.os }}-gradle-
-
-      - name: "Cache ~/.gradle"
-          uses: actions/cache@preview
-          if: runner.os == 'Windows'
-          with:
-            path: "~/.gradle"
-            key: ${{ runner.os }}-gradle-${{ hashFiles('**\build.gradle.kts') }}
-            restore-keys: ${{ runner.os }}-gradle-
 
       - name: "Setup Java"
         uses: actions/setup-java@v1
