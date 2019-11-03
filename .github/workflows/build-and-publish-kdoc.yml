@@ -15,7 +15,7 @@ jobs:
         uses: actions/cache@master
         with:
           path: "~/.gradle"
-          key: ${{ runner.os }}-gradle-${{ hashFiles('build.gradle.kts') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle.kts') }}
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: "Setup Java"
