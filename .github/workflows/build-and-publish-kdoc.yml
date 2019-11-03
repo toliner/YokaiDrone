@@ -21,7 +21,7 @@ jobs:
           arguments: dokka dokka-gfm dokka-javadoc
 
       - name: Copy dokka output to doc dir
-        run: cp build/dokka/gfm build/dokka/html build/dokka/javadoc docs
+        run: cp -r build/dokka/gfm build/dokka/html build/dokka/javadoc docs
 
       - name: Deploy to GH-Pages
         uses: crazy-max/ghaction-github-pages@v1
