@@ -15,6 +15,20 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 
+private typealias FuncOnGuildMessageReceived = (
+    command: String,
+    args: List<String>,
+    event: GuildMessageReceivedEvent,
+    config: CommandHandlingAbility.Config
+) -> Unit
+
+private typealias FuncOnPrivateMessageReceived = (
+    command: String,
+    args: List<String>,
+    event: PrivateMessageReceivedEvent,
+    config: CommandHandlingAbility.Config
+) -> Unit
+
 @Suppress("unused")
 object CommandHandlingAbility : Ability<CommandHandlingAbility.Config> {
 
@@ -27,18 +41,17 @@ object CommandHandlingAbility : Ability<CommandHandlingAbility.Config> {
 
     class Config : AbilityConfig {
 
-        internal var funcGuildMessage: ((command: String, args: List<String>, event: GuildMessageReceivedEvent, config: Config) -> Unit)? =
-            null
-        internal var funcPrivateMessage: ((command: String, args: List<String>, event: PrivateMessageReceivedEvent, config: Config) -> Unit)? =
-            null
+        internal var funcGuildMessage: FuncOnGuildMessageReceived? = null
+
+        internal var funcPrivateMessage: FuncOnPrivateMessageReceived? = null
 
         @Suppress("unused")
-        fun onGuildMessageReceived(action: (command: String, args: List<String>, event: GuildMessageReceivedEvent, config: Config) -> Unit) {
+        fun onGuildMessageReceived(action: FuncOnGuildMessageReceived) {
             funcGuildMessage = action
         }
 
         @Suppress("unused")
-        fun onPrivateMessageReceived(action: (command: String, args: List<String>, event: PrivateMessageReceivedEvent, config: Config) -> Unit) {
+        fun onPrivateMessageReceived(action: FuncOnPrivateMessageReceived) {
             funcPrivateMessage = action
         }
     }
