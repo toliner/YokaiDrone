@@ -21,12 +21,12 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: "Cache ~/.gradle"
-          uses: actions/cache@preview
-          if: runner.os == 'Windows'
-          with:
-            path: "~/.gradle"
-            key: ${{ runner.os }}-gradle-${{ hashFiles('**\build.gradle.kts') }}
-            restore-keys: ${{ runner.os }}-gradle-
+        uses: actions/cache@preview
+        if: runner.os == 'Windows'
+        with:
+          path: "~/.gradle"
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**\build.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradle-
 
       - name: "Setup Java"
         uses: actions/setup-java@v1
