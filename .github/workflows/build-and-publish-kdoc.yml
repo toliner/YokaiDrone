@@ -1,0 +1,32 @@
+name: Build and publish KDoc to GH-Pages
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  document:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: "Setup Java"
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Run dokka
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: dokka dokka-gfm dokka-javadoc
+
+      - name: Copy dokka output to doc dir
+          - run: cp build/dokka/gfm build/dokka/html build/dokka/javadoc docs
+
+      - name: Deploy to GH-Pages
+        uses: crazy-max/ghaction-github-pages@v1
+        with:
+          build_dir: docs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PAT: ${{ secrets.GITHUB_PA }}
