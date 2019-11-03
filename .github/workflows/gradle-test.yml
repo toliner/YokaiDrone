@@ -9,28 +9,28 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
 
-    - name: "Cache ~/.gradle"
-        uses: actions/cache@master
+      - name: "Cache ~/.gradle"
+        uses: actions/cache@preview
         with:
           path: "~/.gradle"
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle.kts') }}
           restore-keys: ${{ runner.os }}-gradle-
 
-    - name: "Setup Java"
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - name: run test
-      uses: eskatos/gradle-command-action@v1
-      with:
-        arguments: test
-      env:
-        DISCORD_ACCESS_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: test-result-${{ matrix.os }}
-        path: build/reports/tests
+      - name: "Setup Java"
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: run test
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: test
+        env:
+          DISCORD_ACCESS_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: test-result-${{ matrix.os }}
+          path: build/reports/tests
