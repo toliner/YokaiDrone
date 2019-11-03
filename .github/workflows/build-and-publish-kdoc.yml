@@ -11,10 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: "Cache ~/.gradle"
+      - name: "Cache ~/.gradle/caches"
         uses: actions/cache@preview
         with:
-          path: "~/.gradle"
+          path: "~/.gradle/caches"
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle.kts') }}
           restore-keys: ${{ runner.os }}-gradle-
 
