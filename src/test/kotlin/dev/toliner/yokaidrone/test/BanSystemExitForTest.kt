@@ -36,7 +36,7 @@ object BanSystemExitForTest : SecurityManager() {
         System.setSecurityManager(systemSecManager)
     }
 
-    private class ExitException(state: Int) : SecurityException() {
+    class ExitException(state: Int) : SecurityException() {
         var state = 0
 
         init {

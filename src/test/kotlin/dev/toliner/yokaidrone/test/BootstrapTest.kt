@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.slf4j.LoggerFactory
-import kotlin.test.assertFails
+import kotlin.test.assertFailsWith
 
 @Suppress("RemoveSingleExpressionStringTemplate")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -34,21 +34,21 @@ class BootstrapTest {
 
     @Test
     fun `run main() without args`() {
-        assertFails {
+        assertFailsWith(BanSystemExitForTest.ExitException::class) {
             main(emptyArray())
         }
     }
 
     @Test
     fun `run main() for help`() {
-        assertFails {
+        assertFailsWith(BanSystemExitForTest.ExitException::class) {
             main(arrayOf("--help"))
         }
     }
 
     @Test
     fun `run main() with incorrect yokai classpath`() {
-        assertFails {
+        assertFailsWith(BanSystemExitForTest.ExitException::class) {
             main(
                 arrayOf(
                     "--yokai=dev.toliner.yokaidrone.Nothing",
@@ -60,7 +60,7 @@ class BootstrapTest {
 
     @Test
     fun `run main() with non-yokai class`() {
-        assertFails {
+        assertFailsWith(BanSystemExitForTest.ExitException::class) {
             main(
                 arrayOf(
                     "--yokai=${List::class.java.canonicalName}",

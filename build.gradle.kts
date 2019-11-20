@@ -29,6 +29,7 @@ dependencies {
     implementation("com.github.ajalt:clikt:2.2.0")
 
     testImplementation(kotlin("test-junit5"))
+    testImplementation("io.mockk:mockk:1.9.3")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.0")
 
     api("net.dv8tion:JDA:4.0.0_54")
@@ -67,6 +68,7 @@ tasks {
         }
     }
 
+    @Suppress("UNUSED_VARIABLE")
     val dokka by getting(DokkaTask::class) {
         outputFormat = "html"
         outputDirectory = "$buildDir/dokka/html"
