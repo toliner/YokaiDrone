@@ -7,7 +7,4 @@
 
 package dev.toliner.yokaidrone.api
 
-/**
- * Empty interface for configuration of [Ability].
- */
-interface AbilityConfig
+object Abilities

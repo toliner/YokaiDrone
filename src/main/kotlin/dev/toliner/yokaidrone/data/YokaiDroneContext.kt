@@ -5,9 +5,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package dev.toliner.yokaidrone.api
+package dev.toliner.yokaidrone.data
 
-/**
- * Empty interface for configuration of [Ability].
- */
-interface AbilityConfig
+interface YokaiDroneContext {
+    val droneModule: DroneModule
+
+    data class Default(override val droneModule: DroneModule) : YokaiDroneContext
+}

@@ -7,9 +7,7 @@
 
 package dev.toliner.yokaidrone.ability
 
-import dev.toliner.yokaidrone.api.Ability
-import dev.toliner.yokaidrone.api.AbilityConfig
-import dev.toliner.yokaidrone.api.Yokai
+import dev.toliner.yokaidrone.api.*
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent
@@ -36,6 +34,10 @@ object CommandHandlingAbility : Ability<CommandHandlingAbility.Config> {
 
     override fun gainedByYokai(yokai: Yokai, config: Config, builder: JDABuilder) {
         builder.addEventListeners(CommandHandlingEventListener(config))
+    }
+
+    override fun DependencyMap.dependencies() {
+
     }
 
 
@@ -73,4 +75,10 @@ object CommandHandlingAbility : Ability<CommandHandlingAbility.Config> {
             }
         }
     }
+
+    override fun getDefaultConfig(): Config = Config()
 }
+
+@Suppress("unused")
+val Abilities.commandHandling
+    get() = CommandHandlingAbility

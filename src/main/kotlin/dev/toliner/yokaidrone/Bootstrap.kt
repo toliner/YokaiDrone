@@ -10,7 +10,10 @@ package dev.toliner.yokaidrone
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.option
+import dev.toliner.yokaidrone.api.Drone
 import dev.toliner.yokaidrone.api.Yokai
+import dev.toliner.yokaidrone.data.DroneModule
+import dev.toliner.yokaidrone.data.YokaiDroneContext
 import net.dv8tion.jda.api.JDABuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -31,7 +34,6 @@ private class Bootstrap : CliktCommand() {
 
     override fun run() {
         logger.info("YokaiDrone start setting up")
-        val builder = JDABuilder(token)
         yokai?.split(':')?.forEach {
             runCatching {
                 ClassLoader.getSystemClassLoader().loadClass(it).newInstance() as Yokai
@@ -40,11 +42,10 @@ private class Bootstrap : CliktCommand() {
                 printStacktraceToDebug(e)
                 exitProcess(1)
             }.onSuccess {
-                it.init(builder)
+                Drone.registerYokai(it)
             }
         }
-        logger.info("YokaiDrone is ready now, start booting.")
-        builder.build().awaitReady()
+        Drone.setup(YokaiDroneContext.Default(DroneModule(JDABuilder(), token)))
     }
 
     private fun printStacktraceToDebug(e: Throwable) {

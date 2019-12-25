@@ -26,4 +26,8 @@ interface Ability<T : AbilityConfig> {
      * @param builder [JDABuilder] instance to configure about discord event.
      */
     fun gainedByYokai(yokai: Yokai, config: T, builder: JDABuilder)
+
+    fun DependencyMap.dependencies()
+
+    fun getDefaultConfig(): T
 }
