@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Yokai - YokaiDrone</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">YokaiDrone</a>&nbsp;/&nbsp;<a href="../index.html">dev.toliner.yokaidrone.api</a>&nbsp;/&nbsp;<a href="./index.html">Yokai</a><br/>
+<br/>
+<h1>Yokai</h1>
+<code><span class="keyword">interface </span><span class="identifier">Yokai</span></code> <a href="https://github.com/toliner/YokaiDrone/tree/master/src/main/kotlin/dev/toliner/yokaidrone/api/Yokai.kt#L22">(source)</a>
+<p>Interface for Yokai, which is one set of bot functions.
+The first thing you should do when you build bot is choose or implement Yokai.
+Yokai must be specified by command-line argument, then all specified Yokai is loaded by bootstrap.
+Each Yokai can have some <a href="../-ability/index.html">Ability</a>.
+You can gain and configure <a href="../-ability/index.html">Ability</a>s by overriding <a href="init.html">init</a> method.
+<strong>All implementation must have non-parameter constructor.</strong></p>
+<p><strong>Author</strong><br/>
+toliner</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="init.html">init</a></h4>
+</td>
+<td>
+<p>This method is called by bootstrap at first.
+You can configure all about <a href="./index.html">Yokai</a>, including <a href="../-ability/index.html">Ability</a>s.
+If this method is not called, the <a href="./index.html">Yokai</a> is not loaded.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">init</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../gain-ability.html">gainAbility</a></h4>
+</td>
+<td>
+<p>An helper function to gain ability.
+By using this in <a href="init.html">Yokai.init</a>, Yokai can gain and configure <a href="../-ability/index.html">Ability</a>s.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-ability-config.html"><span class="identifier">AbilityConfig</span></a><span class="symbol">&gt;</span> <a href="./index.html"><span class="identifier">Yokai</span></a><span class="symbol">.</span><span class="identifier">gainAbility</span><span class="symbol">(</span><span class="identifier" id="dev.toliner.yokaidrone.api$gainAbility(dev.toliner.yokaidrone.api.Yokai, dev.toliner.yokaidrone.api.Ability((dev.toliner.yokaidrone.api.gainAbility.T)), kotlin.Function1((dev.toliner.yokaidrone.api.gainAbility.T, kotlin.Unit)))/ability">ability</span><span class="symbol">:</span>&nbsp;<a href="../-ability/index.html"><span class="identifier">Ability</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="dev.toliner.yokaidrone.api$gainAbility(dev.toliner.yokaidrone.api.Yokai, dev.toliner.yokaidrone.api.Ability((dev.toliner.yokaidrone.api.gainAbility.T)), kotlin.Function1((dev.toliner.yokaidrone.api.gainAbility.T, kotlin.Unit)))/configure">configure</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
