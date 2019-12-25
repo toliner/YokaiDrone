@@ -9,10 +9,10 @@ package dev.toliner.yokaidrone.test
 
 import dev.toliner.yokaidrone.ability.commandHandling
 import dev.toliner.yokaidrone.api.Abilities
-import dev.toliner.yokaidrone.api.Drone
 import dev.toliner.yokaidrone.api.Yokai
 import dev.toliner.yokaidrone.api.gainAbility
 import dev.toliner.yokaidrone.data.YokaiDroneContext
+import dev.toliner.yokaidrone.internal.Drone
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.junit5.MockKExtension
 import org.junit.jupiter.api.BeforeAll

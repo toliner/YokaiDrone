@@ -10,10 +10,10 @@ package dev.toliner.yokaidrone
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.option
-import dev.toliner.yokaidrone.api.Drone
 import dev.toliner.yokaidrone.api.Yokai
 import dev.toliner.yokaidrone.data.DroneModule
 import dev.toliner.yokaidrone.data.YokaiDroneContext
+import dev.toliner.yokaidrone.internal.Drone
 import net.dv8tion.jda.api.JDABuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

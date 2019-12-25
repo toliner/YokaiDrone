@@ -5,8 +5,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package dev.toliner.yokaidrone.api
+package dev.toliner.yokaidrone.internal
 
+import dev.toliner.yokaidrone.api.*
 import dev.toliner.yokaidrone.data.DroneModule
 import dev.toliner.yokaidrone.data.YokaiDroneContext
 import org.slf4j.Logger
@@ -21,7 +22,7 @@ import kotlin.reflect.full.isSuperclassOf
 /**
  * Controller of all Yokai and their abilities.
  */
-object Drone : Injects<DroneModule> {
+internal object Drone : Injects<DroneModule> {
     private val logger: Logger = LoggerFactory.getLogger(Drone::class.java)
     private val yokaiSet = mutableSetOf<Yokai>()
     private val yokaiAbilities = mutableMapOf<Yokai, MutableSet<Pair<Ability<*>, AbilityConfig>>>()
@@ -79,7 +80,10 @@ object Drone : Injects<DroneModule> {
                 val config = abilityConfigMap[it] ?: it.getDefaultConfig()
 
                 @Suppress("UNCHECKED_CAST")
-                (it as Ability<AbilityConfig>).gainedByYokai(yokai, config, builder)
+                (it as Ability<AbilityConfig>).gainedByYokai(
+                    yokai, config,
+                    builder
+                )
             }
         }
 

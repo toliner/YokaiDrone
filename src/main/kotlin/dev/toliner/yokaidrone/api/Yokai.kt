@@ -7,6 +7,8 @@
 
 package dev.toliner.yokaidrone.api
 
+import dev.toliner.yokaidrone.internal.Drone
+
 /**
  * Interface for Yokai, which is one set of bot functions.
  * The first thing you should do when you build bot is choose or implement Yokai.
@@ -33,7 +35,7 @@ interface Yokai {
  * @param ability An [Ability] to gain.
  * @param configure configure [AbilityConfig] in this lambda.
  */
-inline fun <reified T : AbilityConfig> Yokai.gainAbility(
+fun <T : AbilityConfig> Yokai.gainAbility(
     ability: Ability<T>,
     configure: T.() -> Unit
 ) {
