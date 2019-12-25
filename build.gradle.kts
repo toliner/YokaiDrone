@@ -25,8 +25,10 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("reflect"))
     implementation("ch.qos.logback:logback-classic:1.2.3")
     implementation("com.github.ajalt:clikt:2.2.0")
+    implementation("space.traversal.kapsule:kapsule-core:1.0")
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("io.mockk:mockk:1.9.3")
@@ -35,19 +37,21 @@ dependencies {
     api("net.dv8tion:JDA:4.0.0_54")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-}
-
 application {
     mainClassName = "dev.toliner.yokaidrone.BootstrapKt"
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
 tasks {
+
+    withType<Test> {
+        useJUnitPlatform()
+    }
+
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
+    }
+
 
     fun DokkaTask.configure() {
         configuration {
